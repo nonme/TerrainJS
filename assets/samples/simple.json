@@ -1,0 +1,41 @@
+{
+  "name": "Sample",
+  "size": {
+    "width": 6,
+    "height": 4
+  },
+  "level": [
+    [
+      { "tile": "OCEAN" },
+      { "tile": "SEA" },
+      { "tile": "OCEAN" },
+      { "tile": "OCEAN" },
+      { "tile": "OCEAN" },
+      { "tile": "OCEAN" }
+    ],
+    [
+      { "tile": "GRASS_PLAINS" },
+      { "tile": "GRASS_PLAINS" },
+      { "tile": "GRASS_FOREST" },
+      { "tile": "MOUNTAINS" },
+      { "tile": "GRASS_FOREST" },
+      { "tile": "GRASS_PLAINS" }
+    ],
+    [
+      { "tile": "GRASS_PLAINS" },
+      { "tile": "GRASS_FOREST" },
+      { "tile": "GRASS_PLAINS" },
+      { "tile": "GRASS_PLAINS" },
+      { "tile": "GRASS_HILLS" },
+      { "tile": "GRASS_PLAINS" }
+    ],
+    [
+      { "tile": "OCEAN" },
+      { "tile": "SEA" },
+      { "tile": "SEA" },
+      { "tile": "SEA" },
+      { "tile": "OCEAN" },
+      { "tile": "OCEAN" }
+    ]
+  ]
+}

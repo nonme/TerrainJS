@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Terrain</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Procedural terrain generator written in HTML5 / JavaScript / Phaser."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0, viewport-fit=cover"
+    />
+
+    <link rel="icon" type="image/png" href="assets/web/icon.png"/>
+    <link type="text/css" rel="stylesheet" href="assets/web/game.css"/>
+
+    <script src="lib/phaser.js"></script>
+    <script src="src/Boot.js"></script>
+    <script src="src/Game.js"></script>
+  </head>
+  <body>
+    <h1>Title</h1>
+    <div class="game" id="gameContainer"></div>
+    <script type="text/javascript">
+      window.onload = () => {
+          let game = new Phaser.Game(800, 600, Phaser.AUTO, "gameContainer", null, false, false);
+          game.state.add("Boot", TerrainJS.Boot);
+          game.state.add("Game", TerrainJS.Game);
+
+          game.state.start("Boot");
+      }
+    </script>
+  </body>
+</html>
