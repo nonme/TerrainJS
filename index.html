@@ -16,6 +16,7 @@
     <link type="text/css" rel="stylesheet" href="assets/web/game.css" />
 
     <script src="lib/phaser.js"></script>
+    <script src="node_modules/noisejs/index.js"></script>
     <script src="src/Boot.js"></script>
     <script src="src/Game.js"></script>
     <script src="src/world/World.js"></script>
@@ -23,29 +24,30 @@
     <script src="src/tile/Tile.js"></script>
   </head>
   <body>
-    <h1>Title</h1>
+    <h1> Terrain Procedural Generator (c) LarinBets
     <div class="game" id="gameContainer"></div>
     <script type="text/javascript">
       window.onload = () => {
         let config = {
           type: Phaser.AUTO,
           parent: "gameContainer",
-          width: 1024,
-          height: 768,
-          backgroundColor: "#4488aa",
+          width: 1280,
+          height: 800,
+          backgroundColor: "#00579B", // 181A1B
+          transparent: true,
           scale: {
-            mode: Phaser.Scale.NONE,
-            autoCenter: Phaser.Scale.CENTER_BOTH,
-            width: 1024,
-            height: 768,
-            zoom: 4,
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+            width: 1280,
+            height: 800,
+            zoom: Phaser.Scale.MAX_ZOOM,
             min: {
-              width: 185,
-              height: 90,
-            },
-            max: {
               width: 320,
               height: 200,
+            },
+            max: {
+              width: 1280,
+              height: 800,
             },
           },
         };

@@ -24,7 +24,8 @@ TerrainJS.Game.prototype = {
       alert("Couldn't load json");
       return;
     }
-    this.level = new TerrainJS.WorldBuilder(this).buildFromJSON(json);
+    //this.level = new TerrainJS.WorldBuilder(this).buildFromJSON(json);
+    this.level = new TerrainJS.WorldBuilder(this).createWorld(30, 20);
 
     this.input.on("pointermove", function(pointer) {
       if (!pointer.isDown) return;
@@ -38,7 +39,6 @@ TerrainJS.Game.prototype = {
       if (zoom < 1) zoom = 1;
       this.cameras.main.zoomTo(zoom, 10);
       //this.cameras.main.pan(pointer.x, pointer.y, 10);
-      console.log(this.cameras.main.zoom, dy);
     });
   },
 
