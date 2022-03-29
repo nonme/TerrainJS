@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Terrain</title>
     <meta charset="UTF-8" />
@@ -11,50 +11,9 @@
       name="viewport"
       content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0, viewport-fit=cover"
     />
-
-    <link rel="icon" type="image/png" href="assets/web/icon.png" />
-    <link type="text/css" rel="stylesheet" href="assets/web/game.css" />
-
-    <script src="lib/phaser.js"></script>
-    <script src="node_modules/noisejs/index.js"></script>
-    <script src="src/Boot.js"></script>
-    <script src="src/Game.js"></script>
-    <script src="src/world/World.js"></script>
-    <script src="src/world/WorldBuilder.js"></script>
-    <script src="src/tile/Tile.js"></script>
   </head>
   <body>
-    <h1> Terrain Procedural Generator (c) LarinBets
-    <div class="game" id="gameContainer"></div>
-    <script type="text/javascript">
-      window.onload = () => {
-        let config = {
-          type: Phaser.AUTO,
-          parent: "gameContainer",
-          width: 1280,
-          height: 800,
-          backgroundColor: "#00579B", // 181A1B
-          transparent: true,
-          scale: {
-            mode: Phaser.Scale.FIT,
-            autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
-            width: 1280,
-            height: 800,
-            zoom: Phaser.Scale.MAX_ZOOM,
-            min: {
-              width: 320,
-              height: 200,
-            },
-            max: {
-              width: 1280,
-              height: 800,
-            },
-          },
-        };
-        let game = new Phaser.Game(config);
-        game.scene.add("Boot", TerrainJS.Boot, true);
-        game.scene.add("Game", TerrainJS.Game);
-      };
-    </script>
+    <div id="root"></div>
+    <div id="phaser"></div>
   </body>
 </html>
