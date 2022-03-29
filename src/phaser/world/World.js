@@ -26,6 +26,9 @@ World.prototype = {
   },
   isWater: function(type) {
     return type == Bindings.TILE_OCEAN || type == Bindings.TILE_SEA;
+  },
+  destroy: function() {
+    this.world.forEach(tile => tile.sprite.destroy());
   }
 };
 

@@ -9,8 +9,10 @@ function Game() {
 }
 
 Game.prototype = {
+  restart: function (e) {
+    this.scene.restart();
+  },
   preload: function () {
-
     //this.game.load.audio("Name", "assets/music/qwerty.mp3");
     // this.load.json("simple", "./../assets/samples/simple.json");
     this.load.atlas("tiles", spritesheet, spritesheet_json);
@@ -19,6 +21,13 @@ Game.prototype = {
   },
 
   create: function () {
+    function restart(e) {
+      //this.scene.restart();
+      this.level.destroy();
+      this.level = new WorldBuilder(this).createWorld(30, 20);
+    }
+    window.addEventListener("restart", restart.bind(this), false);
+
     //this.game.sound.stopAll();
     //let json = this.cache.json.get("simple");
     //if (!json) {
@@ -37,7 +46,7 @@ Game.prototype = {
         (pointer.y - pointer.prevPosition.y) / this.cameras.main.zoom;
     });
 
-    this.input.on("wheel", function (pointer, go, dx, dy, dz) {
+    this.input.on("wheel", function (pointer, go, dx, dy) {
       let zoom = this.cameras.main.zoom - 0.01 * dy;
       if (zoom < 1) zoom = 1;
       this.cameras.main.zoomTo(zoom, 10);
