@@ -1,6 +1,6 @@
 "use strict"
 
-let TerrainJS = {};
+var TerrainJS = {};
 
 TerrainJS.SCALE_FACTOR = 1;
 
@@ -19,13 +19,15 @@ TerrainJS.Boot = function() {
     TerrainJS.Init();
 };
 
+TerrainJS.Boot.prototype.constructor = TerrainJS.Boot;
+
 TerrainJS.Boot.prototype = {
     preload: function() {
         // this.load.bitmapFont("font", "assets/font/qwerty.png", "assets/font/qwerty.fnt");
     },
 
-    create: function() {
-        this.world.scale.set(TerrainJS.SCALE_FACTOR);
-        this.state.start("Game");
+    create: function(data) {
+        //this.world.scale.set(TerrainJS.SCALE_FACTOR);
+        this.scene.start("Game");
     }
 }

@@ -1,15 +1,14 @@
-"use strict"
+"use strict";
 
-const { Phaser } = require("../../lib/phaser")
+TerrainJS.Tile = function (id, tileX, tileY, key, animKey = key) {
+  this.x = tileX;
+  this.y = tileY;
 
-TerrainJS.Tile = function(game, tileX, tileY, key, animKey = key) {
-    Phaser.Sprite.call(this, game, 0, 0, key);
+  this.id = id;
 
-    this.tileX = tileX;
-    this.tileY = tileY;
+  this.sprite;
 
-    this.spriteName = key;
-}
+  this.spriteName = key;
+}; 
 
-TerrainJS.Tile.prototype = Object.create(Phaser.Sprite.prototype);
 TerrainJS.Tile.prototype.constructor = TerrainJS.Tile;

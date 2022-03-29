@@ -12,24 +12,47 @@
       content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0, viewport-fit=cover"
     />
 
-    <link rel="icon" type="image/png" href="assets/web/icon.png"/>
-    <link type="text/css" rel="stylesheet" href="assets/web/game.css"/>
+    <link rel="icon" type="image/png" href="assets/web/icon.png" />
+    <link type="text/css" rel="stylesheet" href="assets/web/game.css" />
 
     <script src="lib/phaser.js"></script>
     <script src="src/Boot.js"></script>
     <script src="src/Game.js"></script>
+    <script src="src/world/World.js"></script>
+    <script src="src/world/WorldBuilder.js"></script>
+    <script src="src/tile/Tile.js"></script>
   </head>
   <body>
     <h1>Title</h1>
     <div class="game" id="gameContainer"></div>
     <script type="text/javascript">
       window.onload = () => {
-          let game = new Phaser.Game(800, 600, Phaser.AUTO, "gameContainer", null, false, false);
-          game.state.add("Boot", TerrainJS.Boot);
-          game.state.add("Game", TerrainJS.Game);
-
-          game.state.start("Boot");
-      }
+        let config = {
+          type: Phaser.AUTO,
+          parent: "gameContainer",
+          width: 1024,
+          height: 768,
+          backgroundColor: "#4488aa",
+          scale: {
+            mode: Phaser.Scale.NONE,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: 256,
+            height: 192,
+            zoom: 4,
+            min: {
+              width: 185,
+              height: 90,
+            },
+            max: {
+              width: 320,
+              height: 200,
+            },
+          },
+        };
+        let game = new Phaser.Game(config);
+        game.scene.add("Boot", TerrainJS.Boot, true);
+        game.scene.add("Game", TerrainJS.Game);
+      };
     </script>
   </body>
 </html>
