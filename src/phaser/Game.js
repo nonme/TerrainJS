@@ -24,7 +24,10 @@ Game.prototype = {
     function restart(e) {
       //this.scene.restart();
       this.level.destroy();
-      this.level = new WorldBuilder(this).createWorld(30, 20);
+
+      const data = e.detail;
+
+      this.level = new WorldBuilder(this).createWorld(data.width, data.height);
     }
     window.addEventListener("restart", restart.bind(this), false);
 

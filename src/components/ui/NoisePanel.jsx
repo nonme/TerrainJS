@@ -19,7 +19,7 @@ function handleClick(event) {
     amplitude: Number(data.get('amplitude')),
     octaves: Number(data.get('octaves'))
   };
-  const restartEvent = new CustomEvent("restart", formattedData);
+  const restartEvent = new CustomEvent("restart", {detail: formattedData });
   window.dispatchEvent(restartEvent);
 }
 
@@ -43,7 +43,7 @@ function NoisePanel() {
               <TextField
                 label="Width"
                 name="width"
-                value="30"
+                defaultValue="30"
                 variant="outlined"
                 fullWidth
                 size="small"
@@ -58,7 +58,7 @@ function NoisePanel() {
               <TextField
                 label="Height"
                 name="height"
-                value="20"
+                defaultValue="20"
                 variant="outlined"
                 fullWidth
                 size="small"
