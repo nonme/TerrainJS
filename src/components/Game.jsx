@@ -2,19 +2,13 @@ import React from "react";
 import Phaser from "phaser";
 import Boot from "./../phaser/Boot";
 import Game from "./../phaser/Game";
-import Button from "@material-ui/core/Button";
-
-function handleClick(e, button) {
-    e.preventDefault();
-    
-    const event = new Event(button);
-    window.dispatchEvent(event);
-    console.log("sent");
-  }
+import Grid from "@material-ui/core/Grid";
+import NoisePanel from "./ui/NoisePanel.jsx";
+import Box from "@material-ui/core/Box";
 
 function GameComponent() {
   const config = {
-    type: Phaser.AUTO,
+    type: Phaser.FIT,
     parent: "phaser",
     width: 1280,
     height: 800,
@@ -42,16 +36,17 @@ function GameComponent() {
   game.scene.add("Game", Game);
 
   return (
-    <>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={(e) => handleClick(e, "restart")}
-      >
-        Restart
-      </Button>
-      <div id="phaser" />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={2}>
+        <NoisePanel />
+      </Grid>
+      <Grid item xs={8}>
+        <div id="phaser" />
+      </Grid>
+      <Grid item xs={2}>
+        <NoisePanel />
+      </Grid>
+    </Grid>
   );
 }
 
