@@ -9,12 +9,18 @@ import Box from "@material-ui/core/Box";
 import Slider from "@material-ui/core/Slider";
 import InputSlider from "./utils/InputSlider.jsx";
 
-function handleClick(e, button) {
-  e.preventDefault();
-
-  const event = new Event(button);
-  window.dispatchEvent(event);
-  console.log("sent");
+function handleClick(event) {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const formattedData = {
+    width: Number(data.get('width')),
+    height: Number(data.get('height')),
+    frequency: Number(data.get('frequency')),
+    amplitude: Number(data.get('amplitude')),
+    octaves: Number(data.get('octaves'))
+  };
+  const restartEvent = new CustomEvent("restart", formattedData);
+  window.dispatchEvent(restartEvent);
 }
 
 function NoisePanel() {
@@ -31,62 +37,80 @@ function NoisePanel() {
         <Typography component="h1" variant="h5">
           TerrainJS
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={handleClick} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Width"
+                name="width"
+                value="30"
                 variant="outlined"
                 fullWidth
                 size="small"
-                inputProps={{ style: { textAlign: "center" } }}
+                inputProps={{
+                  style: { textAlign: "center" },
+                  inputMode: "numeric",
+                  pattern: "[0-9]*",
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Height"
+                name="height"
+                value="20"
                 variant="outlined"
                 fullWidth
                 size="small"
-                inputProps={{ style: { textAlign: "center" } }}
+                inputProps={{
+                  style: { textAlign: "center" },
+                  inputMode: "numeric",
+                  pattern: "[0-9]*",
+                }}
               />
             </Grid>
             <Grid item xs={12}>
-                <InputSlider params={{
+              <InputSlider
+                params={{
                   name: "Frequency",
                   value: 4,
                   min: 1,
                   max: 12,
                   step: 1,
-                  marks: true
-                  }}/>
+                  marks: true,
+                }}
+              />
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <InputSlider params={{
-              name: "Amplitude",
-              value: 1,
-              min: 0,
-              max: 10,
-              step: 0.5,
-              marks: true
-            }}/>
+            <InputSlider
+              params={{
+                name: "Amplitude",
+                value: 1,
+                min: 0,
+                max: 10,
+                step: 0.5,
+                marks: true,
+              }}
+            />
           </Grid>
           <Grid item xs={12}>
-            <InputSlider params={{
-              name: "Octaves",
-              value: 1,
-              min: 1,
-              max: 7,
-              step: 1,
-              marks: true
-            }}/>
+            <InputSlider
+              params={{
+                name: "Octaves",
+                value: 1,
+                min: 1,
+                max: 7,
+                step: 1,
+                marks: true,
+              }}
+            />
           </Grid>
           <Box sx={{ mt: 3, mb: 2 }}>
             <Button
+              type="submit"
               variant="contained"
               color="primary"
-              onClick={(e) => handleClick(e, "restart")}
               fullWidth
               size="large"
             >

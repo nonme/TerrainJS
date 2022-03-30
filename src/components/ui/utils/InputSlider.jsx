@@ -32,6 +32,7 @@ export default function InputSlider(props) {
       <Grid item xs={12} sm={12}>
         <TextField
           label={params.name}
+          name={params.name.toLowerCase()}
           fullWidth
           variant="outlined"
           size="small"

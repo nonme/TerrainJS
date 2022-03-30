@@ -5,6 +5,7 @@ import Game from "./../phaser/Game";
 import Grid from "@material-ui/core/Grid";
 import NoisePanel from "./ui/NoisePanel.jsx";
 import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
 
 function GameComponent() {
   const config = {
