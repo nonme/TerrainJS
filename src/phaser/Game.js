@@ -56,7 +56,7 @@ Game.prototype = {
     }
 
     window.addEventListener("restart", restart.bind(this), false);
-    window.addEventListener("update", update.bind(this), false);
+    window.addEventListener("elevation_update", update.bind(this), false);
 
     //this.game.sound.stopAll();
     //let json = this.cache.json.get("simple");

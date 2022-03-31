@@ -4,10 +4,10 @@ import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import InputSlider from "./utils/InputSlider.jsx";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -23,12 +23,23 @@ function handleSubmit(event) {
   window.dispatchEvent(restartEvent);
 }
 
-function handleChange(name, value) {
-  const updateEvent = new CustomEvent("update", {detail: {[name]: value}});
+function handleElevationChange(name, value) {
+  const updateEvent = new CustomEvent("elevation_update", { detail: { [name]: value } });
+  window.dispatchEvent(updateEvent);
+}
+
+function handleClimatChange(name, value) {
+  const updateEvent = new CustomEvent("climate_update", { detail: { [name]: value } });
   window.dispatchEvent(updateEvent);
 }
 
 function NoisePanel() {
+  const [climateAlignment, setClimateAlignment] = React.useState("biomes");
+
+  const handleClimatToggleChange = (event, newClimateAlignment) => {
+    setClimateAlignment(newClimateAlignment);
+  };
+
   return (
     <Container>
       <Box
@@ -92,7 +103,7 @@ function NoisePanel() {
                   max: 12,
                   step: 1,
                   marks: true,
-                  onChange: handleChange
+                  onChange: handleElevationChange,
                 }}
               />
             </Grid>
@@ -105,7 +116,7 @@ function NoisePanel() {
                   max: 10,
                   step: 0.5,
                   marks: true,
-                  onChange: handleChange
+                  onChange: handleElevationChange,
                 }}
               />
             </Grid>
@@ -118,10 +129,83 @@ function NoisePanel() {
                   max: 7,
                   step: 1,
                   marks: true,
-                  onChange: handleChange
+                  onChange: handleElevationChange,
                 }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Typography
+                component="h1"
+                variant="h6"
+                style={{ textAlign: "center" }}
+              >
+                Climate
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <ToggleButtonGroup
+                  color="primary"
+                  value={climateAlignment}
+                  exclusive
+                  onChange={handleClimatToggleChange}
+                  size="small"
+                >
+                  <ToggleButton value="biomes">Random</ToggleButton>
+                  <ToggleButton value="climates">Planet</ToggleButton>
+                  <ToggleButton value="combined">Combined</ToggleButton>
+                </ToggleButtonGroup>
+              </Box>
+            </Grid>
+            {climateAlignment == "biomes" && (
+              <React.Fragment>
+                <Grid item xs={12}>
+                  <InputSlider
+                    params={{
+                      name: "Frequency",
+                      value: 5,
+                      min: 1,
+                      max: 12,
+                      step: 1,
+                      marks: true,
+                      onChange: handleClimatChange,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputSlider
+                    params={{
+                      name: "Amplitude",
+                      value: 1,
+                      min: 0,
+                      max: 10,
+                      step: 0.5,
+                      marks: true,
+                      onChange: handleClimatChange,
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <InputSlider
+                    params={{
+                      name: "Octaves",
+                      value: 1,
+                      min: 1,
+                      max: 7,
+                      step: 1,
+                      marks: true,
+                      onChange: handleClimatChange,
+                    }}
+                  />
+                </Grid>
+              </React.Fragment>
+            )}
             <Grid item xs={12}>
               <Button
                 type="submit"
