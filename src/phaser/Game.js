@@ -24,23 +24,32 @@ Game.prototype = {
 
   create: function () {
     function restart(e) {
-      //this.scene.restart();
+      this.seed = Math.random();
+      update.bind(this, e)();
+    }
+    function update(e) {
       this.level.destroy();
 
       const data = e.detail;
-
       this.level = new WorldBuilder(this).createWorld(
         data.width,
         data.height,
-        NoiseGen.Perlin(data.width, data.height, {
-          frequency: data.frequency,
-          amplitude: data.amplitude,
-          octaves: data.octaves,
-          trim: true
-        })
+        NoiseGen.Perlin(
+          data.width,
+          data.height,
+          {
+            frequency: data.frequency,
+            amplitude: data.amplitude,
+            octaves: data.octaves,
+            trim: true,
+          },
+          this.seed
+        )
       );
     }
+
     window.addEventListener("restart", restart.bind(this), false);
+    window.addEventListener("update", update.bind(this), false);
 
     //this.game.sound.stopAll();
     //let json = this.cache.json.get("simple");
@@ -49,7 +58,11 @@ Game.prototype = {
     //  return;
     //}
     //this.level = new WorldBuilder(this).buildFromJSON(json);
-    this.level = new WorldBuilder(this).createWorld(30, 20, NoiseGen.Perlin(30, 20));
+    this.level = new WorldBuilder(this).createWorld(
+      30,
+      20,
+      NoiseGen.Perlin(30, 20)
+    );
 
     this.input.on("pointermove", function (pointer) {
       if (!pointer.isDown) return;

@@ -20,7 +20,7 @@ let NoiseGen = {
         let currentFrequency = config.frequency;
         let currentAmplitude = config.amplitude;
         let sumOfAmplitudes = 0;
-        for (let i = 0; i < config.octaves; ++i) {
+        for (let octave = 0; octave < config.octaves; ++octave) {
           elevation +=
             currentAmplitude *
             noise.perlin2(currentFrequency * nx, currentFrequency * ny);
@@ -29,7 +29,7 @@ let NoiseGen = {
           currentFrequency *= 2;
           currentAmplitude /= 2;
         }
-        elevation /= sumOfAmplitudes;
+        elevation = (Math.min(1, elevation) + 1) / 1.8;
 
         if (
           config.trim &&

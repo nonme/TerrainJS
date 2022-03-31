@@ -77,10 +77,10 @@ WorldBuilder.prototype = {
         let type = Bindings.TILE_OCEAN;
         let id = y * height + x;
 
-        if (elevation[y][x] > 0.6) type = Bindings.TILE_MOUNTAINS;
-        else if (elevation[y][x] > 0.5) type = Bindings.TILE_GRASS_HILLS;
-        else if (elevation[y][x] > 0.3) type = Bindings.TILE_GRASS_FOREST;
-        else if (elevation[y][x] > 0) type = Bindings.TILE_GRASS_PLAINS;
+        if (elevation[y][x] > 0.90) type = Bindings.TILE_MOUNTAINS;
+        else if (elevation[y][x] > 0.8) type = Bindings.TILE_GRASS_HILLS;
+        else if (elevation[y][x] > 0.6) type = Bindings.TILE_GRASS_FOREST;
+        else if (elevation[y][x] > 0.5) type = Bindings.TILE_GRASS_PLAINS;
 
         this.world.addTile(x, y, id, type);
       }
