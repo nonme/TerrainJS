@@ -19,44 +19,71 @@ Game.prototype = {
     this.load.atlas("tiles", spritesheet, spritesheet_json);
     this.cameras.main.zoomTo(2, 10);
     this.cameras.main.pan(100, 100, 10);
-    this.seed = Math.random();
+
+    this.elevationSeed = Math.random();
+    this.moisureSeed   = Math.random();
 
     this.width = 30;
     this.height = 20;
-    this.config = {
+    this.elevationConfig = {
       frequency: 5,
       amplitude: 1,
       octaves: 1,
       trim: true
     };
+
+    this.moisureConfig = {
+      frequency: 7,
+      amplitude: 1,
+      octaves: 2,
+      trim: false
+    }
+
+    this.elevation = NoiseGen.Perlin(this.width, this.height, this.elevationConfig, this.elevationSeed);
+    this.moisure = NoiseGen.Perlin(this.width, this.height, this.moisureConfig, this.moisureSeed);
   },
 
   create: function () {
     function restart(e) {
-      this.seed = Math.random();
-      update.bind(this, e)();
+      this.elevationSeed = Math.random();
+      this.moisureSeed   = Math.random();
+      updateElevation.bind(this, e)();
+      updateMoisure.bind(this, e)();
     }
-    function update(e) {
+    function updateElevation(e) {
       this.level.destroy();
 
-      this.config = {
-        ...this.config,
+      this.elevationConfig = {
+        ...this.elevationConfig,
         ...e.detail
       };
+      this.elevation = NoiseGen.Perlin(this.width, this.height, this.elevationConfig, this.elevationSeed);
       this.level = new WorldBuilder(this).createWorld(
         this.width,
         this.height,
-        NoiseGen.Perlin(
-          this.width,
-          this.height,
-          this.config,
-          this.seed
-        )
+        this.elevation,
+        this.moisure
+      );
+    }
+    function updateMoisure(e) {
+      this.level.destroy();
+
+      this.moisureConfig = {
+        ...this.moisureConfig,
+        ...e.detail
+      };
+      this.moisure = NoiseGen.Perlin(this.width, this.height, this.moisureConfig, this.moisureSeed);
+      this.level = new WorldBuilder(this).createWorld(
+        this.width,
+        this.height,
+        this.elevation,
+        this.moisure
       );
     }
 
     window.addEventListener("restart", restart.bind(this), false);
-    window.addEventListener("elevation_update", update.bind(this), false);
+    window.addEventListener("elevation_update", updateElevation.bind(this), false);
+    window.addEventListener("moisure_update", updateMoisure.bind(this), false);
 
     //this.game.sound.stopAll();
     //let json = this.cache.json.get("simple");
@@ -68,7 +95,8 @@ Game.prototype = {
     this.level = new WorldBuilder(this).createWorld(
       this.width,
       this.height,
-      NoiseGen.Perlin(this.width, this.height, this.config, this.seed)
+      this.elevation,
+      this.moisure
     );
 
     this.input.on("pointermove", function (pointer) {

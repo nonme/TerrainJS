@@ -18,6 +18,7 @@ function GameComponent() {
     scale: {
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+      pixelArt: true,
       width: 1280,
       height: 800,
       zoom: Phaser.Scale.MAX_ZOOM,

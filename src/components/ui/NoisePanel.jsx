@@ -28,13 +28,13 @@ function handleElevationChange(name, value) {
   window.dispatchEvent(updateEvent);
 }
 
-function handleClimatChange(name, value) {
-  const updateEvent = new CustomEvent("climate_update", { detail: { [name]: value } });
+function handleMoisureChange(name, value) {
+  const updateEvent = new CustomEvent("moisure_update", { detail: { [name]: value } });
   window.dispatchEvent(updateEvent);
 }
 
 function NoisePanel() {
-  const [climateAlignment, setClimateAlignment] = React.useState("biomes");
+  const [climateAlignment, setClimateAlignment] = React.useState("moisure");
 
   const handleClimatToggleChange = (event, newClimateAlignment) => {
     setClimateAlignment(newClimateAlignment);
@@ -157,13 +157,13 @@ function NoisePanel() {
                   onChange={handleClimatToggleChange}
                   size="small"
                 >
-                  <ToggleButton value="biomes">Random</ToggleButton>
-                  <ToggleButton value="climates">Planet</ToggleButton>
-                  <ToggleButton value="combined">Combined</ToggleButton>
+                  <ToggleButton value="temp">Temp</ToggleButton>
+                  <ToggleButton value="moisure">Moisure</ToggleButton>
+                  <ToggleButton value="pressure" disabled>ATM Pressure</ToggleButton>
                 </ToggleButtonGroup>
               </Box>
             </Grid>
-            {climateAlignment == "biomes" && (
+            {climateAlignment == "moisure" && (
               <React.Fragment>
                 <Grid item xs={12}>
                   <InputSlider
@@ -174,7 +174,7 @@ function NoisePanel() {
                       max: 12,
                       step: 1,
                       marks: true,
-                      onChange: handleClimatChange,
+                      onChange: handleMoisureChange,
                     }}
                   />
                 </Grid>
@@ -187,7 +187,7 @@ function NoisePanel() {
                       max: 10,
                       step: 0.5,
                       marks: true,
-                      onChange: handleClimatChange,
+                      onChange: handleMoisureChange,
                     }}
                   />
                 </Grid>
@@ -200,7 +200,7 @@ function NoisePanel() {
                       max: 7,
                       step: 1,
                       marks: true,
-                      onChange: handleClimatChange,
+                      onChange: handleMoisureChange,
                     }}
                   />
                 </Grid>

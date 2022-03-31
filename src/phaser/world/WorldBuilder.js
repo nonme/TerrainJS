@@ -66,7 +66,8 @@ WorldBuilder.prototype = {
   createWorld: function (
     width,
     height,
-    elevation
+    elevation,
+    moisure
   ) {
     this.width = width;
     this.height = height;
@@ -77,10 +78,50 @@ WorldBuilder.prototype = {
         let type = Bindings.TILE_OCEAN;
         let id = y * height + x;
 
-        if (elevation[y][x] > 0.90) type = Bindings.TILE_MOUNTAINS;
-        else if (elevation[y][x] > 0.8) type = Bindings.TILE_GRASS_HILLS;
-        else if (elevation[y][x] > 0.6) type = Bindings.TILE_GRASS_FOREST;
-        else if (elevation[y][x] > 0.5) type = Bindings.TILE_GRASS_PLAINS;
+        let e = elevation[y][x];
+        let m = moisure[y][x];
+
+        const MOUNTAINS = 0.9;
+        const HILLS     = 0.8;
+        const HIGH_PLAINS = 0.7;
+        const PLAINS      = 0.5;
+
+        if (e > MOUNTAINS) {
+          if (m > 0.2)
+            type = Bindings.TILE_MOUNTAINS;
+          else
+            type = Bindings.TILE_DESERT_MOUNTAINS;
+        }
+        else if (e > HILLS) {
+          if (m > 0.8)
+            type = Bindings.TILE_GRASS_HILLS_HUGE_FOREST;
+          else if (m > 0.6)
+            type = Bindings.TILE_GRASS_HILLS_FOREST;
+          else if (m > 0.2)
+            type = Bindings.TILE_GRASS_HILLS;
+          else
+            type = Bindings.TILE_DESERT_HILLS;
+        }
+        else if (e > HIGH_PLAINS) {
+          if (m > 0.8)
+            type = Bindings.TILE_GRASS_HUGE_FOREST;
+          else if (m > 0.6)
+            type = Bindings.TILE_GRASS_FOREST;
+          else if (m > 0.2)
+            type = Bindings.TILE_GRASS_HIGH_PLAINS;
+          else
+            type = Bindings.TILE_DESERT_HIGH_PLAINS;
+        }
+        else if (e > PLAINS) {
+          if (m > 0.8)
+          type = Bindings.TILE_GRASS_HUGE_FOREST;
+        else if (m > 0.6)
+          type = Bindings.TILE_GRASS_FOREST;
+        else if (m > 0.2)
+          type = Bindings.TILE_GRASS_PLAINS;
+        else
+          type = Bindings.TILE_DESERT_PLAINS;
+        }
 
         this.world.addTile(x, y, id, type);
       }

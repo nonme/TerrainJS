@@ -35,7 +35,7 @@ let NoiseGen = {
           config.trim &&
           (x == 0 || y == 0 || x == width - 1 || y == height - 1)
         )
-          elevation = -1;
+          elevation = Math.min(0.3, elevation);
         result[y][x] = elevation;
       }
     }
