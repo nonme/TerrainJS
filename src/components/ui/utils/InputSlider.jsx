@@ -20,6 +20,8 @@ export default function InputSlider(props) {
   const [value, setValue] = React.useState(params.value);
 
   const handleSliderChange = (event, newValue) => {
+    if (newValue != value && "onChange" in params) 
+      params.onChange(params.name.toLowerCase(), newValue);
     setValue(newValue);
   };
 

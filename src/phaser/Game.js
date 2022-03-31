@@ -20,6 +20,15 @@ Game.prototype = {
     this.cameras.main.zoomTo(2, 10);
     this.cameras.main.pan(100, 100, 10);
     this.seed = Math.random();
+
+    this.width = 30;
+    this.height = 20;
+    this.config = {
+      frequency: 5,
+      amplitude: 1,
+      octaves: 1,
+      trim: true
+    };
   },
 
   create: function () {
@@ -30,19 +39,17 @@ Game.prototype = {
     function update(e) {
       this.level.destroy();
 
-      const data = e.detail;
+      this.config = {
+        ...this.config,
+        ...e.detail
+      };
       this.level = new WorldBuilder(this).createWorld(
-        data.width,
-        data.height,
+        this.width,
+        this.height,
         NoiseGen.Perlin(
-          data.width,
-          data.height,
-          {
-            frequency: data.frequency,
-            amplitude: data.amplitude,
-            octaves: data.octaves,
-            trim: true,
-          },
+          this.width,
+          this.height,
+          this.config,
           this.seed
         )
       );
@@ -59,9 +66,9 @@ Game.prototype = {
     //}
     //this.level = new WorldBuilder(this).buildFromJSON(json);
     this.level = new WorldBuilder(this).createWorld(
-      30,
-      20,
-      NoiseGen.Perlin(30, 20)
+      this.width,
+      this.height,
+      NoiseGen.Perlin(this.width, this.height, this.config, this.seed)
     );
 
     this.input.on("pointermove", function (pointer) {

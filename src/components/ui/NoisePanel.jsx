@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import Slider from "@material-ui/core/Slider";
 import InputSlider from "./utils/InputSlider.jsx";
 
-function handleClick(event) {
+function handleSubmit(event) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   const formattedData = {
@@ -21,6 +21,11 @@ function handleClick(event) {
   };
   const restartEvent = new CustomEvent("restart", { detail: formattedData });
   window.dispatchEvent(restartEvent);
+}
+
+function handleChange(name, value) {
+  const updateEvent = new CustomEvent("update", {detail: {[name]: value}});
+  window.dispatchEvent(updateEvent);
 }
 
 function NoisePanel() {
@@ -37,7 +42,7 @@ function NoisePanel() {
         <Typography component="h1" variant="h5">
           TerrainJS
         </Typography>
-        <Box component="form" noValidate onSubmit={handleClick} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -87,6 +92,7 @@ function NoisePanel() {
                   max: 12,
                   step: 1,
                   marks: true,
+                  onChange: handleChange
                 }}
               />
             </Grid>
@@ -99,6 +105,7 @@ function NoisePanel() {
                   max: 10,
                   step: 0.5,
                   marks: true,
+                  onChange: handleChange
                 }}
               />
             </Grid>
@@ -111,6 +118,7 @@ function NoisePanel() {
                   max: 7,
                   step: 1,
                   marks: true,
+                  onChange: handleChange
                 }}
               />
             </Grid>
