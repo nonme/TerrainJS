@@ -13,13 +13,13 @@ function handleClick(event) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   const formattedData = {
-    width: Number(data.get('width')),
-    height: Number(data.get('height')),
-    frequency: Number(data.get('frequency')),
-    amplitude: Number(data.get('amplitude')),
-    octaves: Number(data.get('octaves'))
+    width: Number(data.get("width")),
+    height: Number(data.get("height")),
+    frequency: Number(data.get("frequency")),
+    amplitude: Number(data.get("amplitude")),
+    octaves: Number(data.get("octaves")),
   };
-  const restartEvent = new CustomEvent("restart", {detail: formattedData });
+  const restartEvent = new CustomEvent("restart", { detail: formattedData });
   window.dispatchEvent(restartEvent);
 }
 
@@ -70,10 +70,19 @@ function NoisePanel() {
               />
             </Grid>
             <Grid item xs={12}>
+              <Typography
+                component="h1"
+                variant="h6"
+                style={{ textAlign: "center" }}
+              >
+                Perlin Noise
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
               <InputSlider
                 params={{
                   name: "Frequency",
-                  value: 4,
+                  value: 5,
                   min: 1,
                   max: 12,
                   step: 1,
@@ -81,42 +90,42 @@ function NoisePanel() {
                 }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <InputSlider
+                params={{
+                  name: "Amplitude",
+                  value: 1,
+                  min: 0,
+                  max: 10,
+                  step: 0.5,
+                  marks: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputSlider
+                params={{
+                  name: "Octaves",
+                  value: 1,
+                  min: 1,
+                  max: 7,
+                  step: 1,
+                  marks: true,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                size="large"
+              >
+                Restart
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <InputSlider
-              params={{
-                name: "Amplitude",
-                value: 1,
-                min: 0,
-                max: 10,
-                step: 0.5,
-                marks: true,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <InputSlider
-              params={{
-                name: "Octaves",
-                value: 1,
-                min: 1,
-                max: 7,
-                step: 1,
-                marks: true,
-              }}
-            />
-          </Grid>
-          <Box sx={{ mt: 3, mb: 2 }}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              size="large"
-            >
-              Restart
-            </Button>
-          </Box>
         </Box>
       </Box>
     </Container>

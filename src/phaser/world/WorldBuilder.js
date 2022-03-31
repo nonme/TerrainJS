@@ -3,8 +3,6 @@
 import World from "./World";
 import * as Bindings from "./TileBindings";
 
-var Noise = require("noisejs");
-
 function WorldBuilder(scene) {
   this.scene = scene;
 
@@ -13,8 +11,6 @@ function WorldBuilder(scene) {
 
   this.seed;
   this.world;
-
-  this.noise = new Noise.Noise(Math.random());
 }
 
 WorldBuilder.prototype = {
@@ -33,33 +29,6 @@ WorldBuilder.prototype = {
     }
 
     return this.world;
-  },
-  createPerlin: function (
-    width,
-    height,
-    config = { frequency: 5, trim: true }
-  ) {
-    let result = [];
-
-    for (let y = 0; y < height; ++y) {
-      result[y] = [];
-      for (let x = 0; x < width; ++x) {
-        let nx = x / width,
-          ny = y / height;
-
-        let elevation = this.noise.perlin2(
-          config.frequency * nx,
-          config.frequency * ny
-        );
-        if (
-          config.trim &&
-          (x == 0 || y == 0 || x == width - 1 || y == height - 1)
-        )
-          elevation = -1;
-        result[y][x] = elevation;
-      }
-    }
-    return result;
   },
   createIceland: function (
     width,
@@ -97,7 +66,7 @@ WorldBuilder.prototype = {
   createWorld: function (
     width,
     height,
-    elevation = this.createPerlin(width, height)
+    elevation
   ) {
     this.width = width;
     this.height = height;

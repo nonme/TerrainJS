@@ -2,8 +2,9 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
-import Divider from "@material-ui/core/Divider";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import QuestionMark from "@material-ui/icons/HelpOutline";
 /*
     params:
         name: String  -- name to label input field
@@ -28,7 +29,7 @@ export default function InputSlider(props) {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={0} justifyContent="center">
       <Grid item xs={12} sm={12}>
         <TextField
           label={params.name}
@@ -40,19 +41,18 @@ export default function InputSlider(props) {
           onChange={handleInputChange}
           inputProps={{
             "aria-labelledby": "input-slider",
-            style: { textAlign: "center" }
+            style: { textAlign: "center" },
           }}
         />
       </Grid>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={12} sm={10}>
         <Slider
           value={typeof value === "number" ? value : 0}
           onChange={handleSliderChange}
           aria-labelledby="input-slider"
           min={params.min}
           max={params.max}
-          valueLabelDisplay="auto"
-          marks={params.marks}
+          valueLabelDisplay="off"
           step={params.step}
           track={false}
         />

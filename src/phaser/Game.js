@@ -3,6 +3,7 @@
 import WorldBuilder from "./world/WorldBuilder";
 import spritesheet from "./../assets/sprites/spritesheet.png";
 import spritesheet_json from "./../assets/sprites/spritesheet.json";
+import NoiseGen from "./world/utils/NoiseGen";
 
 function Game() {
   this.level;
@@ -18,6 +19,7 @@ Game.prototype = {
     this.load.atlas("tiles", spritesheet, spritesheet_json);
     this.cameras.main.zoomTo(2, 10);
     this.cameras.main.pan(100, 100, 10);
+    this.seed = Math.random();
   },
 
   create: function () {
@@ -27,7 +29,16 @@ Game.prototype = {
 
       const data = e.detail;
 
-      this.level = new WorldBuilder(this).createWorld(data.width, data.height);
+      this.level = new WorldBuilder(this).createWorld(
+        data.width,
+        data.height,
+        NoiseGen.Perlin(data.width, data.height, {
+          frequency: data.frequency,
+          amplitude: data.amplitude,
+          octaves: data.octaves,
+          trim: true
+        })
+      );
     }
     window.addEventListener("restart", restart.bind(this), false);
 
@@ -38,7 +49,7 @@ Game.prototype = {
     //  return;
     //}
     //this.level = new WorldBuilder(this).buildFromJSON(json);
-    this.level = new WorldBuilder(this).createWorld(30, 20);
+    this.level = new WorldBuilder(this).createWorld(30, 20, NoiseGen.Perlin(30, 20));
 
     this.input.on("pointermove", function (pointer) {
       if (!pointer.isDown) return;
