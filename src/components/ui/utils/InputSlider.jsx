@@ -1,10 +1,9 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Slider from "@material-ui/core/Slider";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import QuestionMark from "@material-ui/icons/HelpOutline";
+import Grid from "@mui/material/Grid";
+import Slider from "@mui/material/Slider";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 /*
     params:
         name: String  -- name to label input field

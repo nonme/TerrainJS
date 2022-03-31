@@ -1,12 +1,12 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Box from "@material-ui/core/Box";
-import Slider from "@material-ui/core/Slider";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
 import InputSlider from "./utils/InputSlider.jsx";
 
 function handleSubmit(event) {
@@ -33,7 +33,7 @@ function NoisePanel() {
     <Container>
       <Box
         sx={{
-          marginTop: 20,
+          marginTop: 2,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
