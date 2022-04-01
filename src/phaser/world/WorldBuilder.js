@@ -67,7 +67,8 @@ WorldBuilder.prototype = {
     width,
     height,
     elevation,
-    moisure
+    moisure,
+    temperature
   ) {
     this.width = width;
     this.height = height;
@@ -80,29 +81,68 @@ WorldBuilder.prototype = {
 
         let e = elevation[y][x];
         let m = moisure[y][x];
+        let t = temperature[y][x];
 
         const MOUNTAINS = 0.9;
         const HILLS     = 0.8;
         const HIGH_PLAINS = 0.7;
         const PLAINS      = 0.5;
 
+        const VERY_BIG = 0.8;
+        const BIG = 0.7;
+        const MODERATE = 0.4;
+
+        const HIGH = 0.9;
+        const MEDIUM = 0.2;
+
+        /*
+
+        else if (t > VERY_BIG && m > BIG) {
+           type = Bindings.TILE_TROPICS_FOREST;
+        }
+        else if (t > VERY_BIG) {
+          if (e > HILLS) type = Bindings.TILE_DESERT_HILLS;
+          else if (e > HIGH_PLAINS) type = Bindings.TILE_DESERT_HIGH_PLAINS;
+          else if (e > PLAINS) type = Bindings.TILE_DESERT_PLAINS;
+          else type = Bindings.TILE_OCEAN;
+        }
+        else if (t > BIG && m > VERY_BIG) {
+          if (e > HILLS) 
+        }*/
         if (e > MOUNTAINS) {
-          if (m > 0.2)
+          if (t < HIGH)
             type = Bindings.TILE_MOUNTAINS;
           else
             type = Bindings.TILE_DESERT_MOUNTAINS;
         }
         else if (e > HILLS) {
-          if (m > 0.8)
-            type = Bindings.TILE_GRASS_HILLS_HUGE_FOREST;
-          else if (m > 0.6)
-            type = Bindings.TILE_GRASS_HILLS_FOREST;
-          else if (m > 0.2)
-            type = Bindings.TILE_GRASS_HILLS;
-          else
-            type = Bindings.TILE_DESERT_HILLS;
+          if (t > HIGH && m > VERY_BIG) {
+            type = Bindings.TILE_TROPICS_FOREST;
+          }
+          else if (t > HIGH) {
+            if (m > BIG)
+              type = Bindings.TILE_SAVANNA_HILLS_FOREST;
+            else if (m > MODERATE)
+              type = Bindings.TILE_SAVANNA_HILLS;
+            else
+              type = Bindings.TILE_DESERT_HILLS;
+          }
+          else if (t > MEDIUM) {
+            if (m > BIG)
+              type = Bindings.TILE_GRASS_HILLS_HUGE_FOREST;
+            else if (m > MODERATE)
+              type = Bindings.TILE_GRASS_HILLS_FOREST;
+            else
+              type = Bindings.TILE_GRASS_HILLS; 
+          }
+          else {
+            if (m > MODERATE)
+              type = Bindings.TILE_SNOW_HILLS_FOREST;
+            else
+              type = Bindings.TILE_SNOW_HILLS;
+          }
         }
-        else if (e > HIGH_PLAINS) {
+        /*else if (e > HIGH_PLAINS) {
           if (m > 0.8)
             type = Bindings.TILE_GRASS_HUGE_FOREST;
           else if (m > 0.6)
@@ -111,16 +151,33 @@ WorldBuilder.prototype = {
             type = Bindings.TILE_GRASS_HIGH_PLAINS;
           else
             type = Bindings.TILE_DESERT_HIGH_PLAINS;
-        }
+        }*/
         else if (e > PLAINS) {
-          if (m > 0.8)
-          type = Bindings.TILE_GRASS_HUGE_FOREST;
-        else if (m > 0.6)
-          type = Bindings.TILE_GRASS_FOREST;
-        else if (m > 0.2)
-          type = Bindings.TILE_GRASS_PLAINS;
-        else
-          type = Bindings.TILE_DESERT_PLAINS;
+          if (t > HIGH && m > VERY_BIG) {
+            type = Bindings.TILE_TROPICS_FOREST;
+          }
+          else if (t > HIGH) {
+            if (m > BIG)
+              type = Bindings.TILE_SAVANNA_HUGE_FOREST;
+            else if (m > MODERATE)
+              type = Bindings.TILE_SAVANNA_FOREST;
+            else
+              type = Bindings.TILE_DESERT_PLAINS;
+          }
+          else if (t > MEDIUM) {
+            if (m > BIG)
+              type = Bindings.TILE_GRASS_HUGE_FOREST;
+            else if (m > MODERATE)
+              type = Bindings.TILE_GRASS_FOREST;
+            else
+              type = Bindings.TILE_GRASS_PLAINS; 
+          }
+          else {
+            if (m > MODERATE)
+              type = Bindings.TILE_SNOW_FOREST;
+            else
+              type = Bindings.TILE_SNOW_PLAINS;
+          }
         }
 
         this.world.addTile(x, y, id, type);

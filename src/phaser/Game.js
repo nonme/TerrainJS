@@ -23,8 +23,8 @@ Game.prototype = {
     this.elevationSeed = Math.random();
     this.moisureSeed   = Math.random();
 
-    this.width = 30;
-    this.height = 20;
+    this.width = 40;
+    this.height = 30;
     this.elevationConfig = {
       frequency: 5,
       amplitude: 1,
@@ -41,6 +41,15 @@ Game.prototype = {
 
     this.elevation = NoiseGen.Perlin(this.width, this.height, this.elevationConfig, this.elevationSeed);
     this.moisure = NoiseGen.Perlin(this.width, this.height, this.moisureConfig, this.moisureSeed);
+    this.temperature = [];
+    for (let i = 0; i < this.height; ++i) {
+      this.temperature[i] = [];
+      for (let j = 0; j < this.width; ++j) {
+        let distance = Math.abs(i - this.height / 2);
+        this.temperature[i][j] = (1 - distance / (this.height / 2)) + Math.random() * 0.2 - 0.1;
+        console.log(this.temperature[i][j]);
+      }
+    }
   },
 
   create: function () {
@@ -58,12 +67,7 @@ Game.prototype = {
         ...e.detail
       };
       this.elevation = NoiseGen.Perlin(this.width, this.height, this.elevationConfig, this.elevationSeed);
-      this.level = new WorldBuilder(this).createWorld(
-        this.width,
-        this.height,
-        this.elevation,
-        this.moisure
-      );
+      createWorld.bind(this)();
     }
     function updateMoisure(e) {
       this.level.destroy();
@@ -73,13 +77,19 @@ Game.prototype = {
         ...e.detail
       };
       this.moisure = NoiseGen.Perlin(this.width, this.height, this.moisureConfig, this.moisureSeed);
+      createWorld.bind(this)();
+    }
+
+    function createWorld() {
       this.level = new WorldBuilder(this).createWorld(
         this.width,
         this.height,
         this.elevation,
-        this.moisure
+        this.moisure,
+        this.temperature
       );
     }
+    createWorld.bind(this)();
 
     window.addEventListener("restart", restart.bind(this), false);
     window.addEventListener("elevation_update", updateElevation.bind(this), false);
@@ -92,12 +102,6 @@ Game.prototype = {
     //  return;
     //}
     //this.level = new WorldBuilder(this).buildFromJSON(json);
-    this.level = new WorldBuilder(this).createWorld(
-      this.width,
-      this.height,
-      this.elevation,
-      this.moisure
-    );
 
     this.input.on("pointermove", function (pointer) {
       if (!pointer.isDown) return;

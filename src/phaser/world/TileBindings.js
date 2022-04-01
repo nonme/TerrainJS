@@ -17,6 +17,7 @@ export const TILE_DESERT_PLAINS = 31;
 export const TILE_DESERT_FOREST = 32;
 export const TILE_DESERT_HILLS  = 33;
 export const TILE_DESERT_MOUNTAINS = 34;
+export const TILE_DESERT_HIGH_PLAINS = 35;
 
 export const TILE_SNOW_PLAINS = 51;
 export const TILE_SNOW_FOREST = 52;
@@ -28,5 +29,6 @@ export const TILE_SAVANNA_PLAINS = 71;
 export const TILE_SAVANNA_FOREST = 72;
 export const TILE_SAVANNA_HUGE_FOREST = 73;
 export const TILE_SAVANNA_HILLS = 74;
+export const TILE_SAVANNA_HILLS_FOREST = 75;
 
 export const TILE_TROPICS_FOREST = 91;
