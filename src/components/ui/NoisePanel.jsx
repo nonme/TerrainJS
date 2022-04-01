@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import InputSlider from "./utils/InputSlider.jsx";
 import ToggleButton from "@mui/material/ToggleButton";
+import Slider from "@mui/material/Slider";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 function handleSubmit(event) {
@@ -24,20 +25,44 @@ function handleSubmit(event) {
 }
 
 function handleElevationChange(name, value) {
-  const updateEvent = new CustomEvent("elevation_update", { detail: { [name]: value } });
+  const updateEvent = new CustomEvent("elevation_update", {
+    detail: { [name]: value },
+  });
   window.dispatchEvent(updateEvent);
 }
 
 function handleMoisureChange(name, value) {
-  const updateEvent = new CustomEvent("moisure_update", { detail: { [name]: value } });
+  const updateEvent = new CustomEvent("moisure_update", {
+    detail: { [name]: value },
+  });
+  window.dispatchEvent(updateEvent);
+}
+
+function handleTempChange(name, value) {
+  const updateEvent = new CustomEvent("temp_update", {
+    detail: { [name]: value },
+  });
   window.dispatchEvent(updateEvent);
 }
 
 function NoisePanel() {
   const [climateAlignment, setClimateAlignment] = React.useState("moisure");
+  
+  let equatorTemperature = 70;
+  let polesTemperature = 20;
 
   const handleClimatToggleChange = (event, newClimateAlignment) => {
     setClimateAlignment(newClimateAlignment);
+  };
+
+  const onTempChange = (event, newValue) => {
+    let name = event.target.name;
+    let oldValue = (name == "equator" ? equatorTemperature : polesTemperature);
+
+    if (Math.abs(newValue - oldValue) >= 10) {
+      name == "equator" ? equatorTemperature = newValue : polesTemperature = newValue;
+      handleTempChange(name, newValue);
+    }
   };
 
   return (
@@ -91,7 +116,7 @@ function NoisePanel() {
                 variant="h6"
                 style={{ textAlign: "center" }}
               >
-                Perlin Noise
+                PERLIN NOISE
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -139,7 +164,7 @@ function NoisePanel() {
                 variant="h6"
                 style={{ textAlign: "center" }}
               >
-                Climate
+                CLIMATE
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -159,7 +184,9 @@ function NoisePanel() {
                 >
                   <ToggleButton value="temp">Temp</ToggleButton>
                   <ToggleButton value="moisure">Moisure</ToggleButton>
-                  <ToggleButton value="pressure" disabled>ATM Pressure</ToggleButton>
+                  <ToggleButton value="pressure" disabled>
+                    ATM Pressure
+                  </ToggleButton>
                 </ToggleButtonGroup>
               </Box>
             </Grid>
@@ -205,6 +232,63 @@ function NoisePanel() {
                   />
                 </Grid>
               </React.Fragment>
+            )}
+            {climateAlignment == "temp" && (
+              <Grid item container spacing={0} justifyContent="space-between">
+                <Grid item xs={3} sx={{ mt: 0.5, textAlign: "center" }}>
+                  <Typography
+                    id="equator-temperature-slider"
+                    variant="overline"
+                  >
+                    Equator
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Slider
+                    defaultValue={equatorTemperature}
+                    onChange={onTempChange
+                  }
+                    name="equator"
+                    marks={[
+                      {
+                        value: 0,
+                        label: "Cold",
+                      },
+                      {
+                        value: 100,
+                        label: "Hot",
+                      },
+                    ]}
+                    track={false}
+                    aria-labelledby="equator-temperature-slider"
+                  />
+                </Grid>
+                <Grid item xs={3} sx={{ mt: 0.5, textAlign: "center" }}>
+                  <Typography id="poles-temperature-slider" variant="overline">
+                    Poles
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Slider
+                    defaultValue={polesTemperature}
+                    name="poles"
+                    onChange={onTempChange
+                  }
+                    marks={[
+                      {
+                        value: 0,
+                        label: "Cold",
+                      },
+                      {
+                        value: 100,
+                        label: "Hot",
+                      },
+                    ]}
+                    track={false}
+                    aria-labelledby="poles-temperature-slider"
+                  />
+                </Grid>
+              </Grid>
             )}
             <Grid item xs={12}>
               <Button

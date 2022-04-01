@@ -83,8 +83,8 @@ WorldBuilder.prototype = {
         let m = moisure[y][x];
         let t = temperature[y][x];
 
-        const MOUNTAINS = 0.9;
-        const HILLS     = 0.8;
+        const MOUNTAINS = 0.85;
+        const HILLS     = 0.7;
         const HIGH_PLAINS = 0.7;
         const PLAINS      = 0.5;
 
@@ -160,7 +160,7 @@ WorldBuilder.prototype = {
             if (m > BIG)
               type = Bindings.TILE_SAVANNA_HUGE_FOREST;
             else if (m > MODERATE)
-              type = Bindings.TILE_SAVANNA_FOREST;
+              type = Bindings.TILE_SAVANNA_PLAINS;
             else
               type = Bindings.TILE_DESERT_PLAINS;
           }

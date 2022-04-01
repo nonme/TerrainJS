@@ -39,13 +39,13 @@ function GameComponent() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={2}>
+      <Grid item xs>
         <NoisePanel />
       </Grid>
       <Grid item xs={8}>
         <div id="phaser" />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs>
         <NoisePanel />
       </Grid>
     </Grid>
