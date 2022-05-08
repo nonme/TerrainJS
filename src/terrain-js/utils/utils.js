@@ -9,7 +9,7 @@ export function updateDictionary(a, b) {
 
 var Noise = require("noisejs");
 
-export function calculateNoise(width, height, config, seed = Math.random()) {
+export function calculateNoise(width, height, config, seed) {
   let noise = new Noise.Noise(seed);
   let elevations = [];
 
@@ -24,6 +24,8 @@ export function calculateNoise(width, height, config, seed = Math.random()) {
       let currentAmplitude = 1;
       let sumOfAmplitudes = 0;
       for (let octave = 0; octave < config.octaves; ++octave) {
+        noise = new Noise.Noise(seed + octave);
+
         elevation +=
           (currentAmplitude *
             (noise.simplex2(currentFrequency * nx, currentFrequency * ny) +
@@ -33,8 +35,6 @@ export function calculateNoise(width, height, config, seed = Math.random()) {
         sumOfAmplitudes += currentAmplitude;
         currentFrequency *= 2;
         currentAmplitude /= 2;
-
-        noise = new Noise.Noise(seed + octave);
       }
       elevation = config.amplitude * (elevation / sumOfAmplitudes);
 

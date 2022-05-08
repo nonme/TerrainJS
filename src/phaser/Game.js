@@ -2,6 +2,7 @@
 
 import WorldCreator from "../terrain-js/WorldCreator";
 import HexWorldPainter from "./HexWorldPainter";
+import canvasToImage from "canvas-to-image";
 
 function Game() {
   this.world;
@@ -13,8 +14,8 @@ Game.prototype.preload = function () {
   this.cameras.main.zoomTo(2, 10);
   this.cameras.main.pan(100, 100, 10);
 
-  let elevationTags   = ["ocean", "sea", "plains", "hills", "mountains"];
-  let moistureTags    = ["superarid", "arid", "humid", "superhumid"];
+  let elevationTags = ["ocean", "sea", "plains", "hills", "mountains"];
+  let moistureTags = ["superarid", "arid", "humid", "superhumid"];
   let temperatureTags = ["polar", "cold", "moderate", "hot", "desert"];
 
   let elevationThresholds = [0, 0.45, 0.6, 0.8, 0.9];
@@ -24,17 +25,17 @@ Game.prototype.preload = function () {
   this.tagsInfo = {
     elevation: {
       tags: elevationTags,
-      thresholds: elevationThresholds
+      thresholds: elevationThresholds,
     },
     moisture: {
       tags: moistureTags,
-      thresholds: moistureThresholds
+      thresholds: moistureThresholds,
     },
     temperature: {
       tags: temperatureTags,
-      thresholds: temperatureThresholds
-    }
-  }
+      thresholds: temperatureThresholds,
+    },
+  };
 
   this.worldCreator = new WorldCreator(40, 30, this.tagsInfo);
   this.worldPainter = new HexWorldPainter(this);
@@ -49,10 +50,15 @@ Game.prototype.create = function () {
     "restart",
     (e) => {
       this.world = this.worldCreator
-        .setElevationSeed(Math.random())
-        .setMoisureSeed(Math.random())
+        .reseed()
         .build();
       this.worldPainter.draw(this.world);
+      //const canvas = document.getElementById("phaser").firstChild;
+      //canvasToImage(canvas, {
+      //  name: "terrainJS",
+      //  type: "png",
+      //  quality: 1.0,
+      //});
     },
     false
   );

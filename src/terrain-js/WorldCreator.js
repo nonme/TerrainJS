@@ -86,6 +86,12 @@ WorldCreator.prototype.updateWorld = function (config) {
   updateDictionary(config);
   return this;
 };
+WorldCreator.prototype.reseed = function () {
+  this.build_.terrain.reseed();
+  this.build_.moisure.reseed();
+  this.build_.temperature.reseed();
+  return this;
+}
 
 WorldCreator.prototype.update = function () {};
 
