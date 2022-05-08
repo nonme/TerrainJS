@@ -17,7 +17,7 @@ Game.prototype.preload = function () {
   let moistureTags    = ["superarid", "arid", "humid", "superhumid"];
   let temperatureTags = ["polar", "cold", "moderate", "hot", "desert"];
 
-  let elevationThresholds = [0, 0.5, 0.6, 0.8, 0.9];
+  let elevationThresholds = [0, 0.45, 0.6, 0.8, 0.9];
   let temperatureThresholds = [-1, -0.8, -0.5, 0.5, 0.9];
   let moistureThresholds = [0, 0.25, 0.5, 0.75];
 

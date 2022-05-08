@@ -12,42 +12,42 @@ Tile.prototype.constructor = Tile;
 Tile.prototype.getX = function () {
   return this.x;
 };
-Tile.prototype.getY = function() {
+Tile.prototype.getY = function () {
   return this.y;
-}
-Tile.prototype.isWater = function () {
-  return "ocean" in this.tags || "sea" in this.tags;
 };
-Tile.prototype.addTag = function(tag) {
+Tile.prototype.isWater = function () {
+  return this.tags.includes("ocean") || this.tags.includes("sea");
+};
+Tile.prototype.addTag = function (tag) {
   this.tags.push(tag);
-}
-Tile.prototype.hasTag = function(tag) {
+};
+Tile.prototype.hasTag = function (tag) {
   return this.tags.includes(tag);
-}
-Tile.prototype.hasTags = function(tags) {
+};
+Tile.prototype.hasTags = function (tags) {
   for (let tag of tags) {
     if (!this.hasTag(tag)) return false;
   }
   return true;
-}
-Tile.prototype.addAttribute = function(attribute, attributeInfo = {}) {
+};
+Tile.prototype.addAttribute = function (attribute, attributeInfo = {}) {
   this.attributes.push(attribute);
   this.attributeInfo[attribute] = attributeInfo;
-}
-Tile.prototype.hasAttribute = function(attribute) {
+};
+Tile.prototype.hasAttribute = function (attribute) {
   return this.attributes.includes(attribute);
-}
+};
 Tile.prototype.getTags = function () {
   return this.tags;
 };
-Tile.prototype.getAttributes = function() {
+Tile.prototype.getAttributes = function () {
   return this.attributes;
-}
-Tile.prototype.getAttributeInfo = function(attribute) {
+};
+Tile.prototype.getAttributeInfo = function (attribute) {
   return this.attributeInfo[attribute];
-}
-Tile.prototype.replaceTag = function(tag, newTag) {
+};
+Tile.prototype.replaceTag = function (tag, newTag) {
   this.tags[this.tags.indexOf(tag)] = newTag;
-}
+};
 
 export default Tile;

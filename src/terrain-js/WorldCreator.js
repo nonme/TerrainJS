@@ -31,9 +31,7 @@ function WorldCreator(width = 40, height = 30, tagsInfo) {
   let elevationTags = this.tagsInfo.elevation.tags;
   let moistureTags = this.tagsInfo.moisture.tags;
   this.build_["rivers"] = new RiversBuilder(
-    [
-      elevationTags[elevationTags.length - 1],
-    ],
+    [elevationTags[elevationTags.length - 1]],
     [elevationTags[1]]
   );
 
@@ -41,7 +39,10 @@ function WorldCreator(width = 40, height = 30, tagsInfo) {
     for (let y = 0; y < world.getHeight(); ++y) {
       for (let x = 0; x < world.getWidth(); ++x) {
         let tile = world.getTileAt(x, y);
-        if (tile.getTags().includes("desert") && tile.getTags().includes("superhumid")) {
+        if (
+          tile.getTags().includes("desert") &&
+          tile.getTags().includes("superhumid")
+        ) {
           tile.replaceTag("desert", "hot");
           tile.replaceTag("superhumid", "humid");
         }
@@ -50,11 +51,23 @@ function WorldCreator(width = 40, height = 30, tagsInfo) {
         }
       }
     }
-  }
+  };
 
-  this.build_["spawn_mountains"] = (world) => {
-
-  }
+  this.build_["coastals"] = (world) => {
+    for (let y = 0; y < world.getHeight(); ++y) {
+      for (let x = 0; x < world.getWidth(); ++x) {
+        let tile = world.getTileAt(x, y);
+        if (!tile.isWater()) {
+          console.log(tile.getTags(), tile.isWater());
+          for (let neighbour of world.getNeighbours(tile)) {
+            if (neighbour !== undefined && neighbour.hasTag("ocean")) {
+              neighbour.replaceTag("ocean", "sea");
+            }
+          }
+        }
+      }
+    }
+  };
 }
 
 WorldCreator.prototype.setElevationOptions = function (config) {
@@ -107,8 +120,9 @@ WorldCreator.prototype.build = function () {
     }
   }
 
-  this.build_.rivers.apply(world, elevations);
   this.build_.moisture_temp(world);
+  this.build_.coastals(world);
+  this.build_.rivers.apply(world, elevations);
 
   return world;
 };

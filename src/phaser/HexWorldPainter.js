@@ -45,7 +45,7 @@ HexWorldPainter.prototype.draw = function (world) {
   let calculateSpriteDepth = (tile) =>
     tile.getY() -
     (tile.getX() % 2) +
-    world.getWidth() * world.getHeight() * tile.isWater();
+    world.getWidth() * world.getHeight() * !tile.isWater();
 
   for (let y = 0; y < world.getHeight(); ++y) {
     for (let x = 0; x < world.getWidth(); ++x) {
@@ -87,16 +87,32 @@ HexWorldPainter.prototype.getRiverKey = function (tile, world) {
   let localId = tile.getAttributeInfo("river").localId;
   let key = "";
   for (let neighbour of world.getNeighbours(tile)) {
-    if (
-      neighbour !== undefined &&
-      (neighbour.isWater() ||
-        (neighbour.hasAttribute("river") &&
-          neighbour.getAttributeInfo("river").id == id &&
-          Math.abs(neighbour.getAttributeInfo("river").localId - localId) == 1))
-    ) {
-      key += i;
+    if (neighbour !== undefined) {
+      if (
+        neighbour.hasAttribute("river") &&
+        neighbour.getAttributeInfo("river").id == id &&
+        Math.abs(neighbour.getAttributeInfo("river").localId - localId) == 1
+      ) {
+        key += i;
+      }
     }
     i++;
+  }
+  if (key.length == 1) {
+    i = 1;
+    for (let neighbour of world.getNeighbours(tile)) {
+      if (
+        neighbour !== undefined &&
+        (neighbour.isWater() || neighbour.hasTag("mountains"))
+      ) {
+        key += i;
+        break;
+      }
+      i++;
+    }
+  }
+  if (key.length == 2 && key[0] > key[1]) {
+    key = key[1] + key[0];
   }
   return key;
 };

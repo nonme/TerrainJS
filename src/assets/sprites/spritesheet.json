@@ -98,15 +98,15 @@
     },
     {
       "filename": "superarid_hot_plains",
-      "frame": { "x": 160, "y": 96, "w": 32, "h": 48 }
+      "frame": { "x": 32, "y": 96, "w": 32, "h": 48 }
     },
     {
       "filename": "arid_hot_plains",
-      "frame": { "x": 192, "y": 96, "w": 32, "h": 48 }
+      "frame": { "x": 160, "y": 96, "w": 32, "h": 48 }
     },
     {
       "filename": "humid_hot_plains",
-      "frame": { "x": 224, "y": 96, "w": 32, "h": 48 }
+      "frame": { "x": 192, "y": 96, "w": 32, "h": 48 }
     },
     {
       "filename": "arid_hot_hills",
