@@ -1,11 +1,8 @@
 import React from "react";
 import Phaser from "phaser";
-import Boot from "./../phaser/Boot";
-import Game from "./../phaser/Game";
+import Game from "../phaser/Game";
 import Grid from "@mui/material/Grid";
 import NoisePanel from "./ui/NoisePanel.jsx";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 
 function GameComponent() {
   const config = {
@@ -34,8 +31,7 @@ function GameComponent() {
   };
 
   const game = new Phaser.Game(config);
-  game.scene.add("Boot", Boot, true);
-  game.scene.add("Game", Game);
+  game.scene.add("Game", Game, true);
 
   return (
     <Grid container spacing={2}>

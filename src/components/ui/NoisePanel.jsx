@@ -39,7 +39,7 @@ function handleMoisureChange(name, value) {
 }
 
 function handleTempChange(name, value) {
-  const updateEvent = new CustomEvent("temp_update", {
+  const updateEvent = new CustomEvent("temperature_update", {
     detail: { [name]: value },
   });
   window.dispatchEvent(updateEvent);
@@ -48,8 +48,8 @@ function handleTempChange(name, value) {
 function NoisePanel() {
   const [climateAlignment, setClimateAlignment] = React.useState("moisure");
   
-  let equatorTemperature = 70;
-  let polesTemperature = 20;
+  let equatorTemperature = 100;
+  let polesTemperature = 0;
 
   const handleClimatToggleChange = (event, newClimateAlignment) => {
     setClimateAlignment(newClimateAlignment);
@@ -59,9 +59,9 @@ function NoisePanel() {
     let name = event.target.name;
     let oldValue = (name == "equator" ? equatorTemperature : polesTemperature);
 
-    if (Math.abs(newValue - oldValue) >= 10) {
+    if (Math.abs(newValue - oldValue) >= 2) {
       name == "equator" ? equatorTemperature = newValue : polesTemperature = newValue;
-      handleTempChange(name, newValue);
+      handleTempChange(name, (newValue - 50) / 50);
     }
   };
 
@@ -137,9 +137,9 @@ function NoisePanel() {
                 params={{
                   name: "Amplitude",
                   value: 1,
-                  min: 0,
-                  max: 10,
-                  step: 0.5,
+                  min: 0.1,
+                  max: 3,
+                  step: 0.1,
                   marks: true,
                   onChange: handleElevationChange,
                 }}
@@ -211,8 +211,8 @@ function NoisePanel() {
                       name: "Amplitude",
                       value: 1,
                       min: 0,
-                      max: 10,
-                      step: 0.5,
+                      max: 4,
+                      step: 0.1,
                       marks: true,
                       onChange: handleMoisureChange,
                     }}
@@ -298,7 +298,7 @@ function NoisePanel() {
                 fullWidth
                 size="large"
               >
-                Restart
+                Reseed
               </Button>
             </Grid>
           </Grid>

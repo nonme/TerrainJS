@@ -1,107 +1,127 @@
 {
   "frames": [
     {
-      "filename": 0,
+      "filename": "sea",
       "frame": { "x": 0, "y": 240, "w": 32, "h": 48 }
     },
     {
-      "filename": 1,
+      "filename": "ocean",
       "frame": { "x": 128, "y": 240, "w": 32, "h": 48 }
     },
     {
-      "filename": 2,
+      "filename": "moderate_mountains",
       "frame": { "x": 0, "y": 288, "w": 32, "h": 48 }
     },
     {
-      "filename": 10,
+      "filename": "superarid_moderate_plains",
       "frame": { "x": 0, "y": 0, "w": 32, "h": 48 }
     },
     {
-      "filename": 11,
-      "frame": { "x": 96, "y": 0, "w": 32, "h": 48 }
-    },
-    {
-      "filename": 12,
-      "frame": { "x": 160, "y": 0, "w": 32, "h": 48 }
-    },
-    {
-      "filename": 13,
-      "frame": { "x": 288, "y": 0, "w": 32, "h": 48 }
-    },
-    {
-      "filename": 16,
+      "filename": "arid_moderate_plains",
       "frame": { "x": 64, "y": 0, "w": 32, "h": 48 }
     },
     {
-      "filename": 17,
+      "filename": "humid_moderate_plains",
+      "frame": { "x": 96, "y": 0, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "superhumid_moderate_plains",
+      "frame": { "x": 160, "y": 0, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "arid_moderate_hills",
+      "frame": { "x": 288, "y": 0, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "humid_moderate_hills",
       "frame": { "x": 128, "y": 0, "w": 32, "h": 48 }
     },
     {
-      "filename": 18,
+      "filename": "superhumid_moderate_hills",
       "frame": { "x": 320, "y": 0, "w": 32, "h": 48 }
     },
     {
-      "filename": 31,
+      "filename": "arid_desert_plains",
       "frame": { "x": 0, "y": 192, "w": 32, "h": 48 }
     },
     {
-      "filename": 32,
+      "filename": "superhumid_desert_plains",
       "frame": { "x": 32, "y": 192, "w": 32, "h": 48 }
     },
     {
-      "filename": 33,
-      "frame": { "x": 96, "y": 192, "w": 32, "h": 48 }
+      "filename": "superarid_desert_hills",
+      "frame": { "x": 64, "y": 192, "w": 32, "h": 48 }
     },
     {
-      "filename": 34,
+      "filename": "hot_mountains",
       "frame": { "x": 128, "y": 192, "w": 32, "h": 48 }
     },
     {
-      "filename": 35,
-      "frame": { "x": 32, "y": 192, "w": 32, "h": 48 }
+      "filename": "arid_cold_ocean",
+      "frame": { "x": 160, "y": 240, "w": 32, "h": 48 }
     },
     {
-      "filename": 51,
+      "filename": "polar_sea",
+      "frame": { "x": 32, "y": 240, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "polar_ocean",
+      "frame": { "x": 192, "y": 240, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "humid_polar_ocean",
+      "frame": { "x": 224, "y": 240, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "superhumid_polar_ocean",
+      "frame": { "x": 256, "y": 240, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "superarid_cold_plains",
       "frame": { "x": 192, "y": 144, "w": 32, "h": 48 }
     },
     {
-      "filename": 52,
+      "filename": "humid_cold_plains",
       "frame": { "x": 224, "y": 144, "w": 32, "h": 48 }
     },
     {
-      "filename": 53,
+      "filename": "superhumid_cold_plains",
       "frame": { "x": 256, "y": 144, "w": 32, "h": 48 }
     },
     {
-      "filename": 54,
+      "filename": "superarid_cold_hills",
       "frame": { "x": 288, "y": 144, "w": 32, "h": 48 }
     },
     {
-      "filename": 55,
+      "filename": "humid_cold_hills",
       "frame": { "x": 320, "y": 144, "w": 32, "h": 48 }
     },
     {
-      "filename": 71,
+      "filename": "superarid_hot_plains",
       "frame": { "x": 160, "y": 96, "w": 32, "h": 48 }
     },
     {
-      "filename": 72,
+      "filename": "arid_hot_plains",
       "frame": { "x": 192, "y": 96, "w": 32, "h": 48 }
     },
     {
-      "filename": 73,
+      "filename": "humid_hot_plains",
       "frame": { "x": 224, "y": 96, "w": 32, "h": 48 }
     },
     {
-      "filename": 74,
+      "filename": "arid_hot_hills",
       "frame": { "x": 256, "y": 96, "w": 32, "h": 48 }
     },
     {
-      "filename": 75,
+      "filename": "humid_hot_hills",
       "frame": { "x": 288, "y": 96, "w": 32, "h": 48 }
     },
     {
-      "filename": 91,
+      "filename": "superhumid_hot_plains",
+      "frame": { "x": 352, "y": 96, "w": 32, "h": 48 }
+    },
+    {
+      "filename": "superhumid_hot_hills",
       "frame": { "x": 352, "y": 96, "w": 32, "h": 48 }
     }
   ]
