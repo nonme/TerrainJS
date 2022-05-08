@@ -1,5 +1,6 @@
 # TerrainJS
 
+![alt TerrainJS](https://github.com/nonme/TerrainJS/blob/main/src/assets/samples/terrainjs.jpg?raw=true)
 ## Quickstart
 
 `git clone https://github.com/nonme/TerrainJS.git
