@@ -7,8 +7,8 @@ function SimplexMoisureBuilder(width, height) {
   AbstractBuilder.call(this, width, height);
   this.config = {
     frequency: 10,
-    amplitude: 1.1,
-    octaves: 1,
+    amplitude: 1.3,
+    octaves: 2,
   };
 }
 

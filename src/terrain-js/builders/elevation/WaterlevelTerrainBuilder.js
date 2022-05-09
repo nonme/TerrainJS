@@ -7,7 +7,7 @@ function WaterlevelTerrainBuilder(width, height) {
   this.config = {
     frequency: 3,
     waterLevel: 0.6,
-    amplitude: 1.1,
+    amplitude: 1.2,
     octaves: 2,
     elevations: {
       frequency: 8,
